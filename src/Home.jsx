@@ -1,11 +1,34 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { DivApp, DivTasks } from './Styles/HomeStyle'
 
-export class Home extends Component {
-  render() {
-    return (
-      <div>Home</div>
-    )
-  }
+export default function Home() {
+  return (
+    <>
+      <DivApp>
+        <p>Home</p>
+        <form action="submit">
+          <label htmlFor="task">
+            <input type="text" name="task"/>
+            <input type="submit" name="task"/>
+          </label>
+        </form>
+        <div>
+          <p>aqui ficarão os filtros</p>
+          <button>tarefas concluidas</button>
+          <button>tarefas a fazer</button>
+        </div>
+      </DivApp>
+      <DivTasks>
+        <ul>
+          <li>
+            aqui ficarão as tarefas
+            <button> editar</button>
+            <button> excluir</button>
+            <button> concluir</button>
+          </li>
+        </ul>
+      </DivTasks>
+    </>
+  )
 }
 
-export default Home
