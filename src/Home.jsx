@@ -1,5 +1,6 @@
 import React from 'react'
-import { BodyContent, DivApp, DivTasks, LiTask, UlTask} from './Styles/HomeStyle'
+import { BodyContent, DivApp} from './Styles/HomeStyle'
+import TaskList from './components/TaskList'
 
 export default function Home() {
   return (
@@ -17,22 +18,7 @@ export default function Home() {
             <button>tarefas a fazer</button>
           </div>
         </DivApp>
-        <DivTasks>
-          <UlTask data-testid="ul-task">
-            <LiTask data-testid="li-task">
-              <div>
-                aqui ficarão as tarefas
-              </div>
-              <div>
-                <button> editar</button>
-                {' '}
-                <button> excluir</button>
-                {' '}
-                <button> concluir</button>
-              </div>
-            </LiTask>
-          </UlTask>
-        </DivTasks>
+        <TaskList/>
       </BodyContent>
   )
 }
