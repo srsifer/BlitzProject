@@ -1,14 +1,22 @@
-import React,{useState, UseEfect} from 'react'
+import React,{useState, UseEfect, useContext, useEffect, useLayoutEffect} from 'react'
 import {DivTasks, LiTask, UlTask} from '../Styles/HomeStyle'
+import MyContext from '../MyContext'
 
 export default function TaskList() {
+  const [renderTaskList, setRenderTaskList] = useState([])
+  const {task} = useContext(MyContext)
+
+  useEffect(() => {
+    setRenderTaskList([...renderTaskList, task])
+  },[task])
 
   return (
     <DivTasks>
       <UlTask data-testid="ul-task">
-        <LiTask data-testid="li-task">
+       {renderTaskList.map((_task, index) => {
+          <LiTask data-testid="li-task">
           <div>
-            aqui ficarão as tarefas
+            {index}
           </div>
           <div>
             <button> editar</button>
@@ -18,6 +26,7 @@ export default function TaskList() {
             <button> concluir</button>
           </div>
         </LiTask>
+       })}
       </UlTask>
     </DivTasks>
   )
