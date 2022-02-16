@@ -1,22 +1,20 @@
-import React, {useState} from 'react'
-import { BodyContent, DivApp} from './Styles/HomeStyle'
-import TaskList from './components/TaskList'
+import React, {useState} from 'react';
+import { BodyContent, DivApp} from './Styles/HomeStyle';
+import TaskList from './components/TaskList';
 //import MyContext from './MyContext'
 
 export default function Home() {
-  const [state, setState] = useState(['']);
-  const [renderTaskList, setRenderTaskList] = useState([])
+  const [state, setState] = useState();
+  const [renderTaskList, setRenderTaskList] = useState();
 
   const handlechange = ({ value }) => {
-    setState(value)
+    setState(value);
   };
 
   const handleClick = () => {
-    setRenderTaskList(state)
-    //console.log(renderTaskList)
-  }
+    setRenderTaskList(state);
+  };
 
-  
   return (
       <BodyContent>
         <DivApp>
@@ -25,6 +23,7 @@ export default function Home() {
             name="task"
             data-testid="new-task"
             placeholder='Nova tarefa'
+            isRequired
             onChange={(event) => handlechange(event.target)}
             />
           <button 
