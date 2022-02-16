@@ -14,11 +14,11 @@ export default function TaskList({renderTaskList}) {
   },[renderTaskList])
 
   const removeTask = (target) => {
-    const {parentNode: {parentNode: {parentNode : {parentNode}}}} = target;
+    //const {parentNode: {parentNode: {parentNode : {parentNode}}}} = target;
+   // parentNode.remove()
     render.splice(target.id,1)
-    //setRender(removedTask)
-    console.log(render)
-    parentNode.remove()
+    setRender([...render])
+   
   }
 
   return (
