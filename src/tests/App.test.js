@@ -29,7 +29,7 @@ describe('testes de renderização e adição das tarefas', () => {
     expect(liTask).toBeInTheDocument()
     const removeTask = screen.getByText(/excluir/i)
     userEvent.click(removeTask)
-    expect(liTask).toBeEmptyDOMElement()
+    expect(liTask).not.toBeInTheDocument();
   })
 
 })

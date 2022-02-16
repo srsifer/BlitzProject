@@ -13,7 +13,10 @@ export default function TaskList({renderTaskList}) {
     return null;
   },[renderTaskList])
 
-  
+  const removeTask = (target) => {
+    const {parentNode: {parentNode: {parentNode : {parentNode}}}} = target;
+    parentNode.remove()
+  }
 
   return (
     render !== [] && (
@@ -29,7 +32,7 @@ export default function TaskList({renderTaskList}) {
                 <div>
                   <button> editar </button>
                   {' '}
-                  <button> excluir</button>
+                  <button onClick={ (e) => removeTask(e.target)}> excluir</button>
                   {' '}
                   <button> concluir</button>
                 </div>
