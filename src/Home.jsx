@@ -1,43 +1,49 @@
 import React, {useState} from 'react'
 import { BodyContent, DivApp} from './Styles/HomeStyle'
 import TaskList from './components/TaskList'
-import MyContext from './MyContext'
+//import MyContext from './MyContext'
 
 export default function Home() {
   const [state, setState] = useState(['']);
+  const [renderTaskList, setRenderTaskList] = useState([])
 
-  const createTask = ({ value }) => {
-    setState(...state, value)
+  const handlechange = ({ value }) => {
+    setState(value)
   };
 
-  const value = {
-    task: state,
-  };
+  const handleClick = () => {
+    setRenderTaskList(state)
+    //console.log(renderTaskList)
+  }
 
+  
   return (
       <BodyContent>
         <DivApp>
-          <form action="submit">
-            <label htmlFor="task">
-              <input
-                type="text"
-                name="task"
-                data-testid="new-task"
-                placeholder='Nova tarefa'
-                onChange={(e) => createTask(e.target)}
-                />
-              <button type="button" name="task" data-testid="subimit-task">adicionar tarefa</button>
-            </label>
-          </form>
+          <input
+            type="text"
+            name="task"
+            data-testid="new-task"
+            placeholder='Nova tarefa'
+            onChange={(event) => handlechange(event.target)}
+            />
+          <button 
+            type="submit"
+            name="task"
+            data-testid="subimit-task"
+            onClick={() => handleClick()}
+            >
+            adicionar tarefa
+            </button>
           <div>
             Filtros 
             <button>tarefas concluidas</button>
             <button>tarefas a fazer</button>
           </div>
         </DivApp>
-        <MyContext.Provider value={value}>
-          <TaskList/>
-        </MyContext.Provider>
+        {/*<MyContext.Provider renderTaskList={renderTaskList}>*/}
+          <TaskList renderTaskList={renderTaskList}/>
+        {/*</MyContext.Provider>*/}
       </BodyContent>
   )
 }
