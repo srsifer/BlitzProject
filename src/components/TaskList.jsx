@@ -15,6 +15,9 @@ export default function TaskList({renderTaskList}) {
 
   const removeTask = (target) => {
     const {parentNode: {parentNode: {parentNode : {parentNode}}}} = target;
+    render.splice(target.id,1)
+    //setRender(removedTask)
+    console.log(render)
     parentNode.remove()
   }
 
@@ -32,7 +35,7 @@ export default function TaskList({renderTaskList}) {
                 <div>
                   <button> editar </button>
                   {' '}
-                  <button onClick={ (e) => removeTask(e.target)}> excluir</button>
+                  <button id={index} onClick={ (e) => removeTask(e.target)}> excluir</button>
                   {' '}
                   <button> concluir</button>
                 </div>
