@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 
 export default function TaskList({renderTaskList}) {
   const [render, setRender] = useState([])
-  //const [noTask, setNoTask] = useState(false);
-  
+
   useEffect(() => {
     if (renderTaskList !== undefined) {
       setRender([...render, renderTaskList])
@@ -14,10 +13,11 @@ export default function TaskList({renderTaskList}) {
     return null;
   },[renderTaskList])
 
+  
 
   return (
     render !== [] && (
-      <div>
+      <>
         {render.map((_element, index) => {
           return(
           <DivTasks key={index}>
@@ -38,11 +38,11 @@ export default function TaskList({renderTaskList}) {
           </DivTasks>
       )})}
     )
-    </div>
+    </>
     )
   )
 }
 
 TaskList.propTypes = {
-  renderTaskList: PropTypes.arrayOf(PropTypes.string).isRequired
+  renderTaskList: PropTypes.string,
 }
