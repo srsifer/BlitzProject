@@ -1,6 +1,5 @@
-import React,{/*useContext,*/ useState, useEffect} from 'react'
-import {DivTasks, LiTask, UlTask} from '../Styles/HomeStyle'
-//import MyContext from '../MyContext'
+import React,{useState, useEffect} from 'react'
+import  TaskOnly  from './TaskOnly'
 import PropTypes from 'prop-types';
 
 export default function TaskList({renderTaskList}) {
@@ -20,6 +19,10 @@ export default function TaskList({renderTaskList}) {
     setRender([...render])
   }
 
+  const cancelEditTask = () => {
+    setEdditing(false)
+  }
+  
   const editTask = () => {
     setEdditing(true)
   }
@@ -39,34 +42,24 @@ export default function TaskList({renderTaskList}) {
 
   return (
     render !== [] && (
-      <>
-        {render.map((_element, index) => {
+      <>{render.map(
+        (_element, index) => {
           return(
-          <DivTasks key={index}>
-            <UlTask data-testid="ul-task">
-              <LiTask data-testid="li-task" key={index}>
-                <div>
-                  {render[index]}
-                </div>
-                <div>
-                  <button id={index} onClick={() => editTask()}> editar </button>
-                  {' '}
-                  {edditing ? (
-                    <><input type="text" display="hidden" onChange={(e) => EditingValue(e.target)}/> 
-                    {' '}
-                      <button id={index} onClick={(e) => saveEditedTask(e.target)}>salvar</button>
-                    </>) : null}
-                    {' '}
-                  <button id={index} onClick={ (e) => removeTask(e.target)}> excluir</button>
-                  {' '}
-                  <button id={index} onClick={(e) => completTask(e.target)}> concluir</button>
-                </div>
-              </LiTask>
-            </UlTask>
-          </DivTasks>
-      )})}
-    )
-    </>
+            <TaskOnly
+              key={index}
+              cancelEditTask={cancelEditTask}
+              index={index}
+              edditing={edditing}
+              removeTask={removeTask}
+              editTask={editTask}
+              saveEditedTask={saveEditedTask}
+              completTask={completTask}
+              EditingValue={EditingValue}
+              render={render}
+            />
+          )}
+        )}
+      </>
     )
   )
 }
