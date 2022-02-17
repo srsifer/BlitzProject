@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 export default function TaskList({renderTaskList}) {
   const [render, setRender] = useState([])
+  const [edditing, setEdditing] = useState(false);
+  const [hadlleChangeEdit, setHiliteChangeEdit] = useState('');
 
   useEffect(() => {
     if (renderTaskList !== undefined) {
@@ -14,11 +16,25 @@ export default function TaskList({renderTaskList}) {
   },[renderTaskList])
 
   const removeTask = (target) => {
-    //const {parentNode: {parentNode: {parentNode : {parentNode}}}} = target;
-   // parentNode.remove()
     render.splice(target.id,1)
     setRender([...render])
-   
+  }
+
+  const editTask = () => {
+    setEdditing(true)
+  }
+
+  const saveEditedTask = (target) => {
+    render.splice(target.id,1, hadlleChangeEdit)
+    setEdditing(false)
+  }
+
+  const completTask = (target) => {
+    console.log(`completando a tarefa${ target.id}`)
+  }
+
+  const EditingValue = ({value}) => {
+    setHiliteChangeEdit(value)
   }
 
   return (
@@ -33,11 +49,17 @@ export default function TaskList({renderTaskList}) {
                   {render[index]}
                 </div>
                 <div>
-                  <button> editar </button>
+                  <button id={index} onClick={() => editTask()}> editar </button>
                   {' '}
+                  {edditing ? (
+                    <><input type="text" display="hidden" onChange={(e) => EditingValue(e.target)}/> 
+                    {' '}
+                      <button id={index} onClick={(e) => saveEditedTask(e.target)}>salvar</button>
+                    </>) : null}
+                    {' '}
                   <button id={index} onClick={ (e) => removeTask(e.target)}> excluir</button>
                   {' '}
-                  <button> concluir</button>
+                  <button id={index} onClick={(e) => completTask(e.target)}> concluir</button>
                 </div>
               </LiTask>
             </UlTask>
